@@ -4,11 +4,10 @@ import Logo from "../assets/bitLogo.svg";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const [aboutDropdown, setAboutDropdown] = useState(false);
   const toggleMenu = () => setIsOpen(!isOpen);
 
-
-    const options = {
+  const options = {
     key: "rzp_test_HJG5Rtuy8Xh2NB",
     amount: "100", //  = INR 1
     name: "Acme shop",
@@ -54,13 +53,27 @@ const Navbar = () => {
           <img src={Logo} alt="Logo" className="h-10 md:w-auto w-32" />
         </div>
 
-        {/* Desktop Menu */}
+
         <ul className="hidden lg:flex space-x-6 items-center font-medium text-blue-900">
           <li>
             <a href="#">Home</a>
           </li>
-          <li>
-            <a href="#">About us</a>
+          <li className="relative group">
+            <button className="flex items-center gap-1">
+              About us <span className="text-xs">▼</span>
+            </button>
+
+            <ul className="absolute left-0 top-full bg-white border rounded shadow-md w-40  hidden group-hover:block">
+              <li className="hover:bg-gray-100 px-4 py-2">
+                <a href="#">Who We Are</a>
+              </li>
+              <li className="hover:bg-gray-100 px-4 py-2">
+                <a href="#">Careers</a>
+              </li>
+              <li className="hover:bg-gray-100 px-4 py-2">
+                <a href="#">Case Studies</a>
+              </li>
+            </ul>
           </li>
           <li>
             <a href="#">Services</a>
@@ -75,9 +88,11 @@ const Navbar = () => {
             <a href="#">Our Blog</a>
           </li>
           <li className="">
-            <button onClick={() => openPayModal(options)} className="bg-green-600 hover:bg-green-700 text-white font-semibold px-5 py-2 rounded-full">
+            <button
+              onClick={() => openPayModal(options)}
+              className="bg-green-600 hover:bg-green-700 text-white font-semibold px-5 py-2 rounded-full"
+            >
               Get in Touch
-               
             </button>
           </li>
         </ul>
@@ -93,7 +108,25 @@ const Navbar = () => {
               <a href="#">Home</a>
             </li>
             <li>
-              <a href="#">About us</a>
+              <button
+                onClick={() => setAboutDropdown(!aboutDropdown)}
+                className="flex items-center gap-1"
+              >
+                About us <span className="text-xs">▼</span>
+              </button>
+              {aboutDropdown && (
+                <ul className="pl-4 space-y-2 mt-1">
+                  <li>
+                    <a href="#">Who We Are</a>
+                  </li>
+                  <li>
+                    <a href="#">Careers</a>
+                  </li>
+                  <li>
+                    <a href="#">Case Studies</a>
+                  </li>
+                </ul>
+              )}
             </li>
             <li>
               <a href="#">Services</a>
